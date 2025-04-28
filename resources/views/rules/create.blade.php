@@ -18,17 +18,17 @@
             </div>
 
             <div>
-                <label class="block text-sm font-medium mb-1">Field (если одно поле)</label>
+                <label class="block text-sm font-medium mb-1">Field</label>
                 <input type="text" name="field" class="w-full border rounded p-2" placeholder="e.g. email">
             </div>
 
             <div>
-                <label class="block text-sm font-medium mb-1">Fields (если несколько полей через запятую)</label>
+                <label class="block text-sm font-medium mb-1">Fields</label>
                 <input type="text" name="fields" class="w-full border rounded p-2" placeholder="e.g. email,name">
             </div>
 
             <div>
-                <label class="block text-sm font-medium mb-1">Options (JSON-формат)</label>
+                <label class="block text-sm font-medium mb-1">Options (JSON)</label>
                 <textarea name="options" class="w-full border rounded p-2 h-32" placeholder="{\" option1\":
                 \"value1\"}"></textarea>
             </div>
