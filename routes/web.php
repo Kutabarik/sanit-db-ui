@@ -3,14 +3,15 @@
 use App\Http\Controllers\RuleController;
 use Illuminate\Support\Facades\Route;
 
-Route::group(['prefix' => 'rules'], function () {
-    Route::get('/', [RuleController::class, 'index'])->name('rules.index');
-    Route::get('/create', [RuleController::class, 'create'])->name('rules.create');
-    Route::post('/', [RuleController::class, 'store'])->name('rules.store');
-    Route::get('/{table}/{index}/edit', [RuleController::class, 'edit'])->name('rules.edit');
-    Route::put('/{table}/{index}', [RuleController::class, 'update'])->name('rules.update');
-    Route::delete('/{table}/{index}', [RuleController::class, 'destroy'])->name('rules.destroy');
+Route::prefix('rules')->name('rules.')->group(function () {
+    Route::get('/', [RuleController::class, 'index'])->name('index');
+    Route::get('/create', [RuleController::class, 'create'])->name('create');
+    Route::post('/', [RuleController::class, 'store'])->name('store');
 
-    Route::get('/run', [RuleController::class, 'showRun'])->name('rules.run.show');
-    Route::post('/run', [RuleController::class, 'run'])->name('rules.run');
+    Route::get('/{name}/edit', [RuleController::class, 'edit'])->name('edit');
+    Route::put('/{name}', [RuleController::class, 'update'])->name('update');
+    Route::delete('/{name}', [RuleController::class, 'destroy'])->name('destroy');
+
+    Route::get('/run', [RuleController::class, 'showRun'])->name('run.show');
+    Route::post('/run', [RuleController::class, 'run'])->name('run');
 });

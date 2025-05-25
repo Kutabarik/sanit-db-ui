@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "0b79de6dea3ee6c41d1aa9c1bf587364",
+    "content-hash": "13f17b5e520bc4d927f18de8b9e798a1",
     "packages": [
         {
             "name": "brick/math",
@@ -1056,11 +1056,11 @@
         },
         {
             "name": "kutabarik/sanit-db",
-            "version": "dev-database-repository",
+            "version": "dev-main",
             "dist": {
                 "type": "path",
                 "url": "../SanitDB",
-                "reference": "1274de51addf36d6cc76c3b125ab18e23030a47d"
+                "reference": "9ad2eb9f3ea7313b9bbdf50d80998be1ba35d0f8"
             },
             "require": {
                 "ext-pdo": "*"

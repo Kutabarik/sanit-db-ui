@@ -4,27 +4,23 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreRuleRequest;
 use App\Http\Requests\UpdateRuleRequest;
-use App\Services\RuleBuilder;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
+use Kutabarik\SanitDb\Rules\RuleDTO;
 use Kutabarik\SanitDb\Rules\RulesManager;
 use Kutabarik\SanitDb\SanitDb;
 
 class RuleController extends Controller
 {
-    private RulesManager $rulesManager;
-
     public function __construct(
-        private RuleBuilder $ruleBuilder,
-        private SanitDb $sanitDb
-    ) {
-        $this->rulesManager = new RulesManager(config('sanitdb.rules'));
-    }
+        private readonly SanitDb      $sanitDb,
+        private readonly RulesManager $rulesManager
+    ) {}
 
     public function index(): View
     {
-        $rules = $this->rulesManager->all();
+        $rules = $this->rulesManager->getAll();
 
         return view('rules.index', compact('rules'));
     }
@@ -36,42 +32,37 @@ class RuleController extends Controller
 
     public function store(StoreRuleRequest $request): RedirectResponse
     {
-        $data = $request->validated();
-        $rule = $this->ruleBuilder->fromArray($data);
+        $rule = RuleDTO::fromArray($request->validated());
 
-        $this->rulesManager->addRule($data['table'], $rule);
+        $this->rulesManager->save($rule);
 
-        return redirect()->route('rules.index')->with('success', 'Rule added successfully.');
+        return redirect()->route('rules.index')->with('success', 'Rule added.');
     }
 
-    public function edit(string $table, int $index): View
+    public function edit(string $name): View
     {
-        $rules = $this->rulesManager->getTableRules($table);
+        $rule = $this->rulesManager->get($name);
 
-        if (! isset($rules[$index])) {
-            abort(404);
+        if (! $rule) {
+            abort(404, 'Rule not found');
         }
 
-        $rule = $rules[$index];
-
-        return view('rules.edit', compact('table', 'index', 'rule'));
+        return view('rules.edit', compact('rule'));
     }
 
-    public function update(UpdateRuleRequest $request, string $table, int $index): RedirectResponse
+    public function update(UpdateRuleRequest $request, string $name): RedirectResponse
     {
-        $data = $request->validated();
-        $rule = $this->ruleBuilder->fromArray($data);
+        $updated = RuleDTO::fromArray($request->validated());
+        $this->rulesManager->save($updated);
 
-        $this->rulesManager->updateRule($table, $index, $rule);
-
-        return redirect()->route('rules.index')->with('success', 'Rule updated successfully.');
+        return redirect()->route('rules.index')->with('success', 'Rule updated.');
     }
 
-    public function destroy(string $table, int $index): RedirectResponse
+    public function destroy(string $name): RedirectResponse
     {
-        $this->rulesManager->deleteRule($table, $index);
+        $this->rulesManager->delete($name);
 
-        return redirect()->route('rules.index')->with('success', 'Rule deleted successfully.');
+        return redirect()->route('rules.index')->with('success', 'Rule deleted.');
     }
 
     public function showRun(): View
