@@ -64,16 +64,4 @@ class RuleController extends Controller
 
         return redirect()->route('rules.index')->with('success', 'Rule deleted.');
     }
-
-    public function showRun(): View
-    {
-        return view('rules.run-start');
-    }
-
-    public function run(Request $request): View
-    {
-        $results = $this->sanitDb->process(config('sanitdb.rules'));
-
-        return view('rules.run-results', compact('results'));
-    }
 }

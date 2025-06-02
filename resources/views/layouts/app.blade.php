@@ -15,7 +15,7 @@
             <h1 class="text-lg font-semibold">Rules Manager</h1>
             <div class="space-x-4">
                 <a href="{{ route('rules.index') }}" class="text-blue-500 hover:underline">Manage Rules</a>
-                <a href="{{ route('rules.run') }}" class="text-blue-500 hover:underline">Run Rules</a>
+                <a href="{{ route('sanit.showRun') }}" class="text-blue-500 hover:underline">Run Rules</a>
             </div>
         </div>
     </header>

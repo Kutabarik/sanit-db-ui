@@ -1,5 +1,5 @@
 <?php
 
 return [
-    'rules' => storage_path('app/rules.json'),
+    'rules' => storage_path('app/public/rules.json'),
 ];

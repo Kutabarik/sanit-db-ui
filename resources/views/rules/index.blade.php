@@ -12,8 +12,22 @@
                 @foreach($rules as $rule)
                     <li class="bg-gray-100 p-4 rounded flex justify-between items-start">
                         <div class="w-full">
-                            <div class="font-semibold text-lg mb-1">{{ $rule->name }}</div>
-                            <pre class="text-sm overflow-x-auto">{{ json_encode($rule->toArray(), JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES) }}</pre>
+                            <div class="font-semibold text-lg mb-2">{{ $rule->name }}</div>
+
+                            <ul class="text-sm space-y-1">
+                                @foreach($rule->toArray() as $key => $value)
+                                    @if (!is_null($value) && $value !== '' && $value !== [])
+                                        <li>
+                                            <span class="font-medium text-gray-700">{{ ucfirst(str_replace('_', ' ', $key)) }}:</span>
+                                            @if (is_array($value))
+                                                {{ implode(', ', $value) }}
+                                            @else
+                                                {{ $value }}
+                                            @endif
+                                        </li>
+                                    @endif
+                                @endforeach
+                            </ul>
                         </div>
 
                         <div class="flex flex-col items-end space-y-2 ml-4">
