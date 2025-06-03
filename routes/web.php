@@ -5,7 +5,7 @@ use App\Http\Controllers\SanitController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
-    redirect()->route('sanit.showRun');
+    return redirect()->route('sanit.showRun');
 });
 
 Route::prefix('sanit')->name('sanit.')->group(function () {

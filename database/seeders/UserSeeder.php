@@ -18,7 +18,7 @@ class UserSeeder extends Seeder
 
         $users = [];
 
-        for ($i = 0; $i < 10; $i++) {
+        for ($i = 0; $i < 30; $i++) {
             $users[] = [
                 'name' => $faker->name,
                 'email' => $faker->unique()->safeEmail,
@@ -44,6 +44,17 @@ class UserSeeder extends Seeder
 
         $users[] = [
             'name' => $faker->name,
+            'email' => null,
+            'phone' => $faker->phoneNumber,
+            'email_verified_at' => now(),
+            'password' => bcrypt('password'),
+            'remember_token' => Str::random(10),
+            'created_at' => now(),
+            'updated_at' => now(),
+        ];
+
+        $users[] = [
+            'name' => $faker->name,
             'email' => 'not-an-email',
             'phone' => $faker->phoneNumber,
             'email_verified_at' => now(),
@@ -54,6 +65,17 @@ class UserSeeder extends Seeder
         ];
 
         $duplicateEmail = $faker->safeEmail;
+
+        $users[] = [
+            'name' => $faker->name,
+            'email' => $duplicateEmail,
+            'phone' => $faker->phoneNumber,
+            'email_verified_at' => now(),
+            'password' => bcrypt('password'),
+            'remember_token' => Str::random(10),
+            'created_at' => now(),
+            'updated_at' => now(),
+        ];
 
         $users[] = [
             'name' => $faker->name,

@@ -17,33 +17,6 @@
     </select>
 </div>
 
-<div>
-    <label class="block font-semibold">Scope</label>
-    <select name="scope" class="w-full border rounded p-2">
-        @foreach(['attribute', 'record', 'record_type', 'source'] as $scope)
-            <option value="{{ $scope }}" @selected(old('scope', $rule->scope ?? '') === $scope)>{{ $scope }}</option>
-        @endforeach
-    </select>
-</div>
-
-<div>
-    <label class="block font-semibold">Level</label>
-    <select name="level" class="w-full border rounded p-2">
-        @foreach(['instance', 'schema'] as $level)
-            <option value="{{ $level }}" @selected(old('level', $rule->level ?? '') === $level)>{{ $level }}</option>
-        @endforeach
-    </select>
-</div>
-
-<div>
-    <label class="block font-semibold">Category</label>
-    <select name="category" class="w-full border rounded p-2">
-        @foreach(['single-source', 'multi-source'] as $cat)
-            <option value="{{ $cat }}" @selected(old('category', $rule->category ?? '') === $cat)>{{ $cat }}</option>
-        @endforeach
-    </select>
-</div>
-
 <div id="field-group" class="hidden">
     <label class="block font-semibold">Field</label>
     <input name="field" type="text" value="{{ old('field', $rule->field ?? '') }}" class="w-full border rounded p-2">

@@ -14,10 +14,14 @@ class UpdateRuleRequest extends FormRequest
     public function rules(): array
     {
         return [
+            'name' => 'required|string',
+            'table' => 'required|string',
             'type' => 'required|string',
+
             'field' => 'nullable|string',
-            'fields' => 'nullable|string',
-            'options' => 'nullable|string',
+            'fields' => 'nullable|array',
+            'fields.*' => 'string',
+            'regex' => 'nullable|string',
         ];
     }
 }
